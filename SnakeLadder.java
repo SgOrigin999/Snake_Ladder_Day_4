@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class SnakeLadder {
 	final static int WINPOINT = 100;
-	static int GETLADDER = 0;
-	
+	static int getLadder = 0;
+
 	static Map<Integer, Integer> snake = new HashMap<Integer, Integer>();
 	static Map<Integer, Integer> ladder = new HashMap<Integer, Integer>();
 
@@ -25,7 +25,7 @@ public class SnakeLadder {
 		ladder.put(46, 90);
 		ladder.put(17, 69);
 	}
-	
+
 	public static int singlePlayeWithZeroPosition() {
 		int player;
 		int playerPosition = 0;
@@ -49,14 +49,14 @@ public class SnakeLadder {
 			System.out.println("Player Stays in the Same Position::");
 		} else if (n == 1) {
 			System.out.println("Player Move ahead by the Number of position recived in die::");
-		}else if (n == 2) {
+		} else if (n == 2) {
 			System.out.println("Player Move  behind by the Number of position recived in die::");
 		}
 		return n;
 	}
-	
+
 	public boolean playerWin() {
-		Scanner sc=new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		String str;
 		int diceValue;
 		boolean result = false;
@@ -70,13 +70,48 @@ public class SnakeLadder {
 				System.out.println("First Player :: " + singlePlaye);
 				if (isWin(singlePlaye)) {
 					System.out.println("player Wins");
-					result= true;
+					result = true;
 				}
 			}
 		} while ("r".equals(str));
 		return result;
 	}
-	
+
+	public void startGame() {
+		int player1 = 0, player2 = 0;
+		int currentPlayer = -1;
+		Scanner s = new Scanner(System.in);
+		String str;
+		int diceValue = 0;
+		do {
+			System.out.println(currentPlayer == -1 ? "\n\nFIRST PLAYER TURN" : "\n\nSECOND PLAYER TURN");
+			System.out.println("Press r to roll Dice");
+			str = s.next();
+			diceValue = rollDice();
+
+			if (currentPlayer == -1) {
+				player1 = calculatePlayerValue(player1, diceValue);
+				System.out.println("------------------");
+				if (isWin(player1)) {
+					System.out.println("First player wins");
+					return;
+				}
+			} else {
+				player2 = calculatePlayerValue(player2, diceValue);
+				System.out.println("------------------");
+				if (isWin(player2)) {
+					System.out.println("Second player wins");
+					return;
+				}
+			}
+			if (getLadder == 0) {
+				currentPlayer = -currentPlayer;
+				System.out.println("CurrentPlayer::" + currentPlayer);
+			}
+
+		} while ("r".equals(str));
+	}
+
 	public void contDice_Position() {
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 		Scanner s = new Scanner(System.in);
@@ -104,9 +139,9 @@ public class SnakeLadder {
 			}
 		} while ("r".equals(str));
 	}
-	
+
 	public int calculatePlayerValue(int player, int diceValue) {
-		
+
 		player = player + diceValue;
 
 		if (player > WINPOINT) {
@@ -137,12 +172,12 @@ public class SnakeLadder {
 		System.out.println("Player Rool The die to get Number 1 to 6 Range only::");
 		int n = snake.rollDice();
 		System.out.println("Check Player Play Option::");
-		int moveOfPlayer=snake.checkOptionThenPlay();
-		System.out.println("Repeat Till Player Reach Wining Position 100::"+snake.playerWin());
-		System.out.println("Repeat Till Player Gets Exact Wining Position 100::"+snake.playerWin());
+		int moveOfPlayer = snake.checkOptionThenPlay();
+		System.out.println("Repeat Till Player Reach Wining Position 100::" + snake.playerWin());
+		System.out.println("Repeat Till Player Gets Exact Wining Position 100::" + snake.playerWin());
 		System.out.println("Count Dice  Number and  Postion:");
 		snake.contDice_Position();
-		
-
+		System.out.println("Play The Game With Two Player And Show Who  Win");
+		snake.startGame();
 	}
 }
