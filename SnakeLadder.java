@@ -77,6 +77,34 @@ public class SnakeLadder {
 		return result;
 	}
 	
+	public void contDice_Position() {
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		Scanner s = new Scanner(System.in);
+		String str;
+		int diceValue = 0;
+		int player1 = 0;
+		do {
+			System.out.println("Press r to roll Dice");
+			str = s.next();
+			diceValue = rollDice();
+			if (player1 <= 100) {
+				player1 = calculatePlayerValue(player1, diceValue);
+				System.out.println("First Player :: " + player1);
+				map.put(diceValue, player1);
+				if (player1 == 100) {
+					for (Map.Entry<Integer, Integer> pair : map.entrySet()) {
+						System.out.println(String.format("Dice (Value) is: %s, position (age) is : %s", pair.getKey(),
+								pair.getValue()));
+					}
+				}
+				if (isWin(player1)) {
+					System.out.println("player wins");
+					return;
+				}
+			}
+		} while ("r".equals(str));
+	}
+	
 	public int calculatePlayerValue(int player, int diceValue) {
 		
 		player = player + diceValue;
@@ -104,16 +132,16 @@ public class SnakeLadder {
 
 	public static void main(String[] args) {
 		SnakeLadder snake = new SnakeLadder();
-		/*
-		 * System.out.println("Snake Ladder Game Play With Single Player::"); int
-		 * singlePlaye = singlePlayeWithZeroPosition();
-		 * System.out.println("Player Rool The die to get Number 1 to 6 Range only::");
-		 * int n = snake.rollDice(); System.out.println("Check Player Play Option::");
-		 * int moveOfPlayer=snake.checkOptionThenPlay();
-		 * System.out.println("Repeat Till Player Reach Wining Position 100::"+snake.
-		 * playerWin());
-		 */
+		System.out.println("Snake Ladder Game Play With Single Player::");
+		int singlePlaye = singlePlayeWithZeroPosition();
+		System.out.println("Player Rool The die to get Number 1 to 6 Range only::");
+		int n = snake.rollDice();
+		System.out.println("Check Player Play Option::");
+		int moveOfPlayer=snake.checkOptionThenPlay();
+		System.out.println("Repeat Till Player Reach Wining Position 100::"+snake.playerWin());
 		System.out.println("Repeat Till Player Gets Exact Wining Position 100::"+snake.playerWin());
+		System.out.println("Count Dice  Number and  Postion:");
+		snake.contDice_Position();
 		
 
 	}
