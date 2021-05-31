@@ -104,13 +104,16 @@ public class SnakeLadder {
 
 	public static void main(String[] args) {
 		SnakeLadder snake = new SnakeLadder();
-		System.out.println("Snake Ladder Game Play With Single Player::");
-		int singlePlaye = singlePlayeWithZeroPosition();
-		System.out.println("Player Rool The die to get Number 1 to 6 Range only::");
-		int n = snake.rollDice();
-		System.out.println("Check Player Play Option::");
-		int moveOfPlayer=snake.checkOptionThenPlay();
-		System.out.println("Repeat Till Player Reach Wining Position 100::"+snake.playerWin());
+		/*
+		 * System.out.println("Snake Ladder Game Play With Single Player::"); int
+		 * singlePlaye = singlePlayeWithZeroPosition();
+		 * System.out.println("Player Rool The die to get Number 1 to 6 Range only::");
+		 * int n = snake.rollDice(); System.out.println("Check Player Play Option::");
+		 * int moveOfPlayer=snake.checkOptionThenPlay();
+		 * System.out.println("Repeat Till Player Reach Wining Position 100::"+snake.
+		 * playerWin());
+		 */
+		System.out.println("Repeat Till Player Gets Exact Wining Position 100::"+snake.playerWin());
 		
 
 	}
